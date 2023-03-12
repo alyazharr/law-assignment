@@ -163,3 +163,21 @@ async def get_meal_plan():
         }
         for data in data_meal]
     return {'results':result}
+
+# Update a note by ID
+@app.put('/notes-meal-plan/change/{note_id}/')
+def update_meal_plan(note_id: int, note_meal: NotesMealPlan):
+    for i, data in enumerate(data_meal):
+        if data.id == note_id:
+            data_meal[i] = note_meal
+            return {'message': f'Meal plan with id {note_id} updated successfully.'}
+    return {'message': f'Meal plan with id {note_id} not found.'}
+
+# Delete a note by ID
+@app.delete('/notes-meal-plan/delete/{note_id}/')
+def delete_meal_plan(note_id: int):
+    for i, data in enumerate(data_meal):
+        if data.id == note_id:
+            del data_meal[i]
+            return {'message': f'Meal plan with id {note_id} deleted successfully.'}
+    return {'message': f'Meal plan with id {note_id} not found.'}
